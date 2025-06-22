@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LM0702 | Digital Creator</title>
+<!-- Favicon for modern browsers -->
+<link rel="icon" type="image/png" href="favicon.png">
+
+<!-- Fallback for older browsers -->
+<link rel="shortcut icon" href="favicon.ico">
+
+<!-- Apple Touch Icon (for iOS devices) -->
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- Optional: For Windows Metro tile -->
+<meta name="msapplication-TileImage" content="mstile-144x144.png">
+<meta name="msapplication-TileColor" content="#0a0a20">
+    <meta name="description" content="Professional portfolio of LM0702 - Digital Creator & Developer">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --neon-blue: #0ff0fc;
+            --neon-pink: #ff00ff;
+            --neon-purple: #9d00ff;
+            --dark-bg: #0a0a20;
+            --darker-bg: #050510;
+            --card-bg: rgba(10, 10, 32, 0.8);
+            --text-color: #e0e0ff;
+            --text-muted: rgba(224, 224, 255, 0.7);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(15, 240, 252, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 0, 255, 0.05) 0%, transparent 50%);
+        }
+        
+        /* Neon Text Effects */
+        .neon-text {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue), 
+                         0 0 20px var(--neon-blue), 
+                         0 0 30px var(--neon-blue);
+            animation: neon-pulse 2s infinite alternate;
+        }
+        
+        @keyframes neon-pulse {
+            0% { text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue); }
+            50% { text-shadow: 0 0 15px var(--neon-blue), 0 0 30px var(--neon-blue); }
+            100% { text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue); }
+        }
+        
+        /* Particle Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: var(--neon-blue);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { opacity: 0.7; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+        
+        /* Header */
+        header {
+            padding: 3rem 0 2rem;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(to bottom, var(--darker-bg) 0%, transparent 100%);
+        }
+        
+        h1 {
+            font-size: 4.5rem;
+            letter-spacing: 0.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient-shift 8s ease infinite;
+            background-size: 200% 200%;
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+            box-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-pink);
+            animation: gradient-shift 8s ease infinite;
+            background-size: 200% 200%;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+        
+        /* Main Content */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 0;
+        }
+        
+        /* Cards Container */
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            padding: 2rem;
+            max-width: 1400px;
+            width: 100%;
+        }
+        
+        /* Card Styling */
+        .card {
+            width: 320px;
+            height: 420px;
+            perspective: 1000px;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+            transform-style: preserve-3d;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 1s;
+            transform-style: preserve-3d;
+        }
+        
+        .card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(15, 240, 252, 0.3);
+            border: 1px solid var(--neon-blue);
+            background: var(--card-bg);
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            transform-style: preserve-3d;
+        }
+        
+        .card-front::before, .card-back::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(15, 240, 252, 0.1) 0%, transparent 70%);
+            transform: rotate(0deg);
+            transition: var(--transition);
+        }
+        
+        .card:hover .card-front::before, .card:hover .card-back::before {
+            transform: rotate(180deg);
+        }
+        
+        /* Flip Indicator Icon */
+        .flip-indicator {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: var(--neon-blue);
+            font-size: 1.5rem;
+            opacity: 0.7;
+            animation: bounce 2s infinite;
+            z-index: 2;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+        
+        /* Flip Hint Text */
+        .flip-hint {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .card:hover .flip-hint {
+            opacity: 1;
+        }
+        
+        /* Mobile Tap Hint */
+        .mobile-tap-hint {
+            display: none;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: var(--neon-pink);
+            font-size: 0.9rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        
+        /* Video Styling for Card Front */
+        .card-front {
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .card-front .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .card-front .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+        
+        .card:hover .video-container video {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        /* Card Back Styling */
+        .card-back {
+            transform: rotateY(180deg);
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+        }
+        
+        .card-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--neon-blue);
+        }
+        
+        .card-desc {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icons a {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(15, 240, 252, 0.1);
+        }
+        
+        .social-icons a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px currentColor;
+        }
+        
+        .social-icons a:nth-child(1):hover { color: #25F4EE; } /* TikTok */
+        .social-icons a:nth-child(2):hover { color: #E1306C; } /* Instagram */
+        .social-icons a:nth-child(3):hover { color: #FF0000; } /* YouTube */
+        .social-icons a:nth-child(4):hover { color: #E60023; } /* Pinterest */
+        
+        /* Crypto Section */
+        .crypto-section {
+            text-align: center;
+            padding: 2rem;
+            margin: 3rem auto 0;
+            background: rgba(15, 240, 252, 0.05);
+            border-top: 1px solid var(--neon-blue);
+            border-bottom: 1px solid var(--neon-pink);
+            width: 100%;
+            max-width: 800px;
+            border-radius: 15px;
+        }
+        
+        .crypto-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--neon-blue);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .crypto-addresses {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        
+        .crypto-wallet {
+            background: rgba(10, 10, 32, 0.7);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--neon-blue);
+            box-shadow: 0 0 15px rgba(15, 240, 252, 0.2);
+            min-width: 250px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .crypto-wallet::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                transparent 45%,
+                rgba(15, 240, 252, 0.3) 50%,
+                transparent 55%
+            );
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translate(-100%, -100%) rotate(30deg); }
+            100% { transform: translate(100%, 100%) rotate(30deg); }
+        }
+        
+        .wallet-type {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--neon-pink);
+        }
+        
+        .wallet-address {
+            font-family: monospace;
+            word-break: break-all;
+            color: var(--text-color);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.5rem;
+            border-radius: 5px;
+            margin: 0.5rem 0;
+        }
+        
+        .copy-btn {
+            background: rgba(15, 240, 252, 0.1);
+            border: 1px solid var(--neon-blue);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 0 auto;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(15, 240, 252, 0.2);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        .copy-btn.copied {
+            background: rgba(15, 240, 252, 0.3);
+            color: var(--neon-blue);
+        }
+        
+        /* Description Section */
+        .description-section {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: rgba(15, 240, 252, 0.05);
+            border: 1px solid var(--neon-blue);
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .description-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--neon-blue);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .description-content {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(15, 240, 252, 0.3);
+            background: linear-gradient(to top, var(--darker-bg) 0%, transparent 100%);
+            position: relative;
+            margin-top: auto;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), var(--neon-pink), transparent);
+        }
+        
+        .copyright {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+            color: var(--dark-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 100;
+            box-shadow: 0 0 20px rgba(15, 240, 252, 0.5);
+            border: none;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 0 30px rgba(15, 240, 252, 0.8);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            
+            .cards-container {
+                gap: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+                letter-spacing: 0.3rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .card {
+                width: 300px;
+                height: 400px;
+            }
+            
+            .back-to-top {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                bottom: 30px;
+                right: 30px;
+            }
+            
+            .crypto-addresses {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .flip-hint { display: none; }
+            .mobile-tap-hint { display: block; }
+        }
+        
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .card {
+                width: 280px;
+                height: 380px;
+            }
+            
+            .crypto-section, .description-section {
+                padding: 1.5rem;
+                margin: 2rem 1rem;
+            }
+        }
+        
+    </style>
+    
+</head>
+<body>
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Header -->
+    <header>
+        <h1 class="neon-text">LM0702</h1>
+        <p class="tagline">Digital Creator | Developer</p>
+    </header>
+    
+    <main>
+        <!-- Cards Section - 6 Projects -->
+        <div class="cards-container">
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <!-- Flip Indicator -->
+                        <div class="flip-indicator">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        
+                        <div class="video-container">
+                            <video autoplay loop muted playsinline>
+                                <source src="project1.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        
+                        <!-- Flip Hint -->
+                        <div class="flip-hint">Hover to flip</div>
+                        <div class="mobile-tap-hint">Tap to flip</div>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="card-title">INSPIVORA</h3>
+                        <p class="card-desc">↓ Tap on icon to check out my content ↓</p>
+                        <div class="social-icons">
+                            <a href="https://tiktok.com/@inspivora" target="_blank" aria-label="TikTok">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                            <a href="https://instagram.com/inspivora" target="_blank" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://youtube.com/@inspivora" target="_blank" aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="flip-indicator">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <div class="video-container">
+                            <video autoplay loop muted playsinline>
+                                <source src="project2.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="flip-hint">Hover to flip</div>
+                        <div class="mobile-tap-hint">Tap to flip</div>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="card-title">AiShortQuoteSongs</h3>
+                        <p class="card-desc">↓ Tap on icon to check out my content ↓</p>
+                        <div class="social-icons">
+                            <a href="https://tiktok.com/@AiShortQuoteSongs" target="_blank" aria-label="TikTok">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                            <a href="https://youtube.com/@AiShortQuoteSongs" target="_blank" aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="flip-indicator">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <div class="video-container">
+                            <video autoplay loop muted playsinline>
+                                <source src="project3.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="flip-hint">Hover to flip</div>
+                        <div class="mobile-tap-hint">Tap to flip</div>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="card-title">QuickBlastFacts</h3>
+                        <p class="card-desc">Procedural Animation</p>
+                        <div class="social-icons">
+                            <a href="https://tiktok.com/@quickblastfacts" target="_blank" aria-label="TikTok">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                            <a href="https://www.instagram.com/quickblastfacts/" target="_blank" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://youtube.com/@quickblastfacts" target="_blank" aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         <!-- PROJECT 4 - COMPLETE WORKING VERSION -->
+<div class="card" id="project4-card">
+    <div class="card-inner">
+        <div class="card-front">
+            <div class="flip-indicator">
+                <i class="fas fa-sync-alt"></i>
+            </div>
+            <div class="video-container">
+                <video autoplay loop muted playsinline>
+                    <source src="project4.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="flip-hint">Hover to flip</div>
+            <div class="mobile-tap-hint">Tap to flip</div>
+        </div>
+        <div class="card-back">
+            <h3 class="card-title">Cool Shyt Finds</h3>
+            <p class="card-desc">You can find cool stuff on my store</p>
+            
+            <!-- ULTIMATE STORE LINK (3 LAYER ACTIVATION) -->
+            <div class="store-link-wrapper" 
+                 onclick="window.open('https://coolshytfinds.wed2c.com', '_blank');"
+                 style="position: relative; margin: 1.5rem 0;">
+                
+                <!-- Visible Button -->
+                <a href="https://coolshytfinds.wed2c.com"
+                   id="storeLink"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   style="display: inline-block;
+                          padding: 0.8rem 1.8rem;
+                          background: linear-gradient(45deg, rgba(15, 240, 252, 0.2), rgba(255, 0, 255, 0.2));
+                          color: var(--neon-blue);
+                          border: 1px solid var(--neon-pink);
+                          border-radius: 8px;
+                          font-size: 1.1rem;
+                          text-decoration: none;
+                          cursor: pointer;
+                          transition: var(--transition);
+                          box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+                          z-index: 10;
+                          position: relative;">
+                    <i class="fas fa-store" style="margin-right: 12px;"></i>
+                    Visit My Store
+                </a>
+                
+                <!-- Invisible Overlay (Emergency Trigger) -->
+                <div class="store-link-overlay"
+                     style="position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            z-index: 20;
+                            opacity: 0;"></div>
+            </div>
+            
+            <!-- DEBUG CONSOLE (Visible only when needed) -->
+            <div id="debugConsole" 
+                 style="display: none;
+                        color: var(--neon-blue);
+                        background: rgba(0, 0, 0, 0.7);
+                        padding: 10px;
+                        margin: 1rem 0;
+                        border: 1px solid var(--neon-blue);
+                        border-radius: 5px;
+                        font-family: monospace;
+                        font-size: 0.8rem;">
+                Debug console ready...
+            </div>
+            
+            <p style="color: var(--text-muted); margin: 1.5rem 0; font-size: 0.9rem;">
+                ↓ Tap on icons to check out my content ↓
+            </p>
+            
+            <div class="social-icons">
+                <a href="https://tiktok.com/@coolshytfinds" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://www.instagram.com/coolshytfinds/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://pinterest.com/coolshytfinds" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+                    <i class="fab fa-pinterest"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- NUCLEAR LINK ACTIVATION SCRIPT -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const storeLink = document.getElementById('storeLink');
+    const overlay = document.querySelector('.store-link-overlay');
+    const debugConsole = document.getElementById('debugConsole');
+    const storeUrl = 'https://coolshytfinds.wed2c.com';
+    
+    // Debug mode (set to true to see console)
+    const debugMode = false;
+    if (debugMode) debugConsole.style.display = 'block';
+    
+    function logDebug(message) {
+        if (debugMode) {
+            debugConsole.innerHTML += `<div>[${new Date().toLocaleTimeString()}] ${message}</div>`;
+        }
+        console.log('STORE LINK DEBUG:', message);
+    }
+    
+    function openStore() {
+        logDebug('Attempting to open store...');
+        
+        // Method 1: Standard window.open
+        try {
+            const newWindow = window.open(storeUrl, '_blank');
+            if (newWindow && !newWindow.closed) {
+                logDebug('Successfully opened with window.open');
+                return true;
+            }
+        } catch (e) {
+            logDebug(`window.open failed: ${e.message}`);
+        }
+        
+        // Method 2: Location change
+        try {
+            window.location.href = storeUrl;
+            logDebug('Attempted page redirect');
+            return true;
+        } catch (e) {
+            logDebug(`location.href failed: ${e.message}`);
+        }
+        
+        // Method 3: Form submission
+        try {
+            const form = document.createElement('form');
+            form.action = storeUrl;
+            form.target = '_blank';
+            form.method = 'post';
+            document.body.appendChild(form);
+            form.submit();
+            logDebug('Attempted form submission');
+            return true;
+        } catch (e) {
+            logDebug(`form submission failed: ${e.message}`);
+        }
+        
+        logDebug('All methods failed');
+        return false;
+    }
+    
+    // Click handlers (3 layers deep)
+    storeLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        logDebug('Main link clicked');
+        if (!openStore()) {
+            alert('Could not open store. Please check popup blockers or try manually:\n' + storeUrl);
+        }
+    });
+    
+    overlay.addEventListener('click', function(e) {
+        e.preventDefault();
+        logDebug('Overlay clicked');
+        openStore();
+    });
+    
+    // Touch handlers
+    storeLink.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        logDebug('Touch event on main link');
+        openStore();
+    });
+    
+    overlay.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        logDebug('Touch event on overlay');
+        openStore();
+    });
+    
+    // Initial debug info
+    logDebug(`Initialized for URL: ${storeUrl}`);
+    logDebug(`Debug mode: ${debugMode}`);
+    
+    // Emergency manual override
+    window.forceOpenStore = function() {
+        logDebug('MANUAL OVERRIDE TRIGGERED');
+        openStore();
+    };
+});
+</script>
+      
+            
+            <!-- Card 5 -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="flip-indicator">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <div class="video-container">
+                            <video autoplay loop muted playsinline>
+                                <source src="project.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="flip-hint">Hover to flip</div>
+                        <div class="mobile-tap-hint">Tap to flip</div>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="card-title">Stay Tuned</h3>
+                        <p class="card-desc">/////</p>
+                        <div class="social-icons">
+                            <a href="https://tiktok.com/" target="_blank" aria-label="TikTok">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                            <a href="https://instagram.com/" target="_blank" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://youtube.com/" target="_blank" aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="https://pinterest.com/" target="_blank" aria-label="Pinterest">
+                                <i class="fab fa-pinterest"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card 6 -->
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="flip-indicator">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <div class="video-container">
+                            <video autoplay loop muted playsinline>
+                                <source src="project.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="flip-hint">Hover to flip</div>
+                        <div class="mobile-tap-hint">Tap to flip</div>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="card-title">Stay Tuned</h3>
+                        <p class="card-desc">/////</p>
+                        <div class="social-icons">
+                            <a href="https://tiktok.com/" target="_blank" aria-label="TikTok">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                            <a href="https://instagram.com/" target="_blank" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://youtube.com/" target="_blank" aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="https://pinterest.com/" target="_blank" aria-label="Pinterest">
+                                <i class="fab fa-pinterest"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Crypto Section -->
+        <div class="crypto-section">
+            <h3 class="crypto-title">Crypto Addresses</h3>
+            <div class="crypto-addresses">
+                <div class="crypto-wallet">
+                    <div class="wallet-type">Ethereum</div>
+                    <div class="wallet-address" id="eth-address">0xcf61FfEF036D57520d9e05EB64114D7824177dC8</div>
+                    <button class="copy-btn" data-target="eth-address">
+                        <i class="far fa-copy"></i> Copy Address
+                    </button>
+                </div>
+                <div class="crypto-wallet">
+                    <div class="wallet-type">Binance UID</div>
+                    <div class="wallet-address" id="binance-uid">177149706</div>
+                    <button class="copy-btn" data-target="binance-uid">
+                        <i class="far fa-copy"></i> Copy UID
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Description Section -->
+        <div class="description-section">
+            <h3 class="description-title">About My Work</h3>
+            <div class="description-content">
+                <p>Hi, I’m Muneeb — a creator, explorer, and digital experimenter. This website is my personal space where I share everything I’m working on, from upcoming projects to things I find interesting or useful. Think of it as my digital home — built by me, for me — but open to the world.
+
+I made this site to keep all my ideas and creations in one place. It’s where I test new concepts, display progress, and document my creative journey. You’ll find previews of future projects, links to my active social accounts, and even a curated online store where I showcase some of the coolest finds.
+
+Everything here reflects my personal taste, style, and vision. Whether it’s something experimental, a product I think others will love, or a random creative spark, it goes here. I’m not following a strict plan — I build what I love, post what I create, and share what excites me.
+
+This portfolio will grow as I do. I’m always learning, always creating, and always finding new ways to express my ideas online. If you’re here out of curiosity, inspiration, or support — welcome. You’re part of the journey now.
+
+Stay connected, check back often, and enjoy exploring this little digital universe I’ve built.</p>
+            </div>
+        </div>
+    </main>
+
+<div class="visit-other-site" style="
+    text-align: center;
+    margin: 3rem 0 1rem 0;
+">
+    <a href="https://lm0702.github.io/-/" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       style="
+           display: inline-block;
+           padding: 0.8rem 2rem;
+           font-size: 1.05rem;
+           color: var(--neon-blue);
+           background: linear-gradient(45deg, rgba(15, 240, 252, 0.15), rgba(255, 0, 255, 0.1));
+           border: 1px solid var(--neon-blue);
+           border-radius: 10px;
+           text-decoration: none;
+           box-shadow: 0 0 12px rgba(15, 240, 252, 0.4);
+           transition: all 0.3s ease;
+       "
+       onmouseover="this.style.boxShadow='0 0 18px rgba(15, 240, 252, 0.7)'"
+       onmouseout="this.style.boxShadow='0 0 12px rgba(15, 240, 252, 0.4)'">
+        ✨ Visit My Other Website ✨
+    </a>
+</div>
+
+<!-- Contact Form Section -->
+<section class="contact-section" style="
+    max-width: 800px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: rgba(15, 240, 252, 0.05);
+    border: 1px solid var(--neon-blue);
+    border-radius: 15px;
+    text-align: center;
+">
+    <h3 class="contact-title" style="
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: var(--neon-blue);
+        font-family: 'Orbitron', sans-serif;
+    ">Get In Touch</h3>
+    
+    <form id="contact-form" style="
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    ">
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 200px;">
+                <input type="text" id="name" name="name" required placeholder="Your Name" style="
+                    width: 100%;
+                    padding: 0.8rem;
+                    background: rgba(10, 10, 32, 0.7);
+                    border: 1px solid var(--neon-blue);
+                    border-radius: 8px;
+                    color: var(--text-color);
+                    font-size: 1rem;
+                    transition: var(--transition);
+                ">
+            </div>
+            <div style="flex: 1; min-width: 200px;">
+                <input type="email" id="email" name="email" required placeholder="Your Email" style="
+                    width: 100%;
+                    padding: 0.8rem;
+                    background: rgba(10, 10, 32, 0.7);
+                    border: 1px solid var(--neon-blue);
+                    border-radius: 8px;
+                    color: var(--text-color);
+                    font-size: 1rem;
+                    transition: var(--transition);
+                ">
+            </div>
+        </div>
+        
+        <textarea id="message" name="message" required placeholder="Your Message" rows="5" style="
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(10, 10, 32, 0.7);
+            border: 1px solid var(--neon-blue);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-size: 1rem;
+            resize: vertical;
+            transition: var(--transition);
+        "></textarea>
+        
+        <!-- Star Rating -->
+        <div class="star-rating" style="
+            margin: 1rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        ">
+            <span style="
+                color: var(--text-muted);
+                margin-right: 1rem;
+                align-self: center;
+            ">Rate this portfolio:</span>
+            <input type="hidden" id="rating" name="rating" value="0">
+            <div class="stars" style="display: flex; gap: 0.3rem;">
+                <i class="far fa-star" data-value="1" style="
+                    font-size: 1.8rem;
+                    color: var(--text-muted);
+                    cursor: pointer;
+                    transition: var(--transition);
+                "></i>
+                <i class="far fa-star" data-value="2" style="
+                    font-size: 1.8rem;
+                    color: var(--text-muted);
+                    cursor: pointer;
+                    transition: var(--transition);
+                "></i>
+                <i class="far fa-star" data-value="3" style="
+                    font-size: 1.8rem;
+                    color: var(--text-muted);
+                    cursor: pointer;
+                    transition: var(--transition);
+                "></i>
+                <i class="far fa-star" data-value="4" style="
+                    font-size: 1.8rem;
+                    color: var(--text-muted);
+                    cursor: pointer;
+                    transition: var(--transition);
+                "></i>
+                <i class="far fa-star" data-value="5" style="
+                    font-size: 1.8rem;
+                    color: var(--text-muted);
+                    cursor: pointer;
+                    transition: var(--transition);
+                "></i>
+            </div>
+        </div>
+        
+        <button type="submit" style="
+            padding: 0.8rem 2rem;
+            background: linear-gradient(45deg, rgba(15, 240, 252, 0.2), rgba(255, 0, 255, 0.2));
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-pink);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+            margin: 0 auto;
+        ">
+            <span id="submit-text">Send Message</span>
+            <i class="fas fa-paper-plane" style="margin-left: 10px;"></i>
+        </button>
+    </form>
+    
+    <div id="form-message" style="
+        margin-top: 1.5rem;
+        padding: 1rem;
+        border-radius: 8px;
+        display: none;
+    "></div>
+</section>
+
+    
+    <!-- Footer -->
+   <footer>
+    <p class="copyright">
+        © <span id="year"></span> LM0702. All Rights Reserved.
+    </p>
+    <div class="footer-social">
+        <a href="https://www.instagram.com/lm0702_/" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           aria-label="Instagram"
+           style="color: inherit; text-decoration: none; margin-left: 10px;">
+            <i class="fab fa-instagram"></i>
+        </a>
+    </div>
+</footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Back to top button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('active');
+            } else {
+                backToTopButton.classList.remove('active');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Mobile card click handler
+        if (window.innerWidth <= 768) {
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('click', function() {
+                    this.querySelector('.card-inner').style.transform = 
+                        this.querySelector('.card-inner').style.transform === 'rotateY(180deg)' 
+                        ? 'rotateY(0deg)' 
+                        : 'rotateY(180deg)';
+                });
+            });
+        }
+        
+        // Create particles
+        const particlesContainer = document.getElementById('particles');
+        if (particlesContainer) {
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = Math.random() * 100 + 'vh';
+                particle.style.width = (Math.random() * 3 + 1) + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = (Math.random() * 15) + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Video autoplay on mobile workaround
+        document.addEventListener('DOMContentLoaded', function() {
+            const videos = document.querySelectorAll('video');
+            videos.forEach(video => {
+                video.muted = true;
+                video.setAttribute('playsinline', '');
+                video.setAttribute('webkit-playsinline', '');
+                
+                const playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log('Autoplay prevented:', error);
+                    });
+                }
+            });
+        });
+        
+        // WORKING Crypto Address Copy Function
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                const addressElement = document.getElementById(targetId);
+                const address = addressElement.textContent;
+                const icon = this.querySelector('i');
+                
+                navigator.clipboard.writeText(address).then(() => {
+                    // Visual feedback
+                    const originalIconClass = icon.className;
+                    icon.className = 'fas fa-check';
+                    this.classList.add('copied');
+                    
+                    setTimeout(() => {
+                        icon.className = originalIconClass;
+                        this.classList.remove('copied');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy:', err);
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = address;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    try {
+                        document.execCommand('copy');
+                        const originalIconClass = icon.className;
+                        icon.className = 'fas fa-check';
+                        this.classList.add('copied');
+                        setTimeout(() => {
+                            icon.className = originalIconClass;
+                            this.classList.remove('copied');
+                        }, 2000);
+                    } catch (e) {
+                        console.error('Fallback copy failed:', e);
+                    }
+                    document.body.removeChild(textArea);
+                });
+            });
+        });
+    </script>
+    <!-- EmailJS and Form Handling -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+    // Initialize EmailJS with your credentials
+    (function() {
+        // Replace these with your actual EmailJS credentials
+        emailjs.init('Z1ra9H38Wjw3ZADCg'); // Public key from EmailJS
+        
+        // Star Rating Functionality
+        const stars = document.querySelectorAll('.star-rating i');
+        const ratingInput = document.getElementById('rating');
+        
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const value = parseInt(this.getAttribute('data-value'));
+                ratingInput.value = value;
+                
+                stars.forEach((s, index) => {
+                    if (index < value) {
+                        s.classList.remove('far');
+                        s.classList.add('fas', 'active');
+                    } else {
+                        s.classList.remove('fas', 'active');
+                        s.classList.add('far');
+                    }
+                });
+            });
+            
+            // Hover effect
+            star.addEventListener('mouseover', function() {
+                const value = parseInt(this.getAttribute('data-value'));
+                
+                stars.forEach((s, index) => {
+                    if (index < value) {
+                        s.classList.remove('far');
+                        s.classList.add('fas');
+                    }
+                });
+            });
+            
+            star.addEventListener('mouseout', function() {
+                const currentRating = parseInt(ratingInput.value);
+                
+                stars.forEach((s, index) => {
+                    if (index >= currentRating) {
+                        s.classList.remove('fas');
+                        s.classList.add('far');
+                    }
+                });
+            });
+        });
+        
+        // Form Submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const submitText = document.getElementById('submit-text');
+            const originalText = submitText.textContent;
+            
+            // Change button text and disable
+            submitText.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            // Send email using EmailJS
+            emailjs.sendForm('service_n1oydnm', 'template_nnc29ii', this)
+                .then(() => {
+                    // Show success message
+                    const messageDiv = document.getElementById('form-message');
+                    messageDiv.textContent = 'Message sent successfully! I\'ll get back to you soon.';
+                    messageDiv.className = 'success';
+                    
+                    // Reset form
+                    this.reset();
+                    stars.forEach(star => {
+                        star.classList.remove('fas', 'active');
+                        star.classList.add('far');
+                    });
+                    ratingInput.value = '0';
+                })
+                .catch((error) => {
+                    // Show error message
+                    const messageDiv = document.getElementById('form-message');
+                    messageDiv.textContent = 'Error sending message. Please try again later or contact me directly.';
+                    messageDiv.className = 'error';
+                    console.error('EmailJS Error:', error);
+                })
+                .finally(() => {
+                    // Reset button
+                    submitText.textContent = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // Hide message after 5 seconds
+                    setTimeout(() => {
+                        document.getElementById('form-message').style.display = 'none';
+                    }, 5000);
+                });
+        });
+    })();
+</script>
+</body>
+</html>
