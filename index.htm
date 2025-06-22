@@ -1419,5 +1419,22 @@ Stay connected, check back often, and enjoy exploring this little digital univer
         });
     })();
 </script>
+    <script>
+  // Disable right-click
+  document.addEventListener('contextmenu', event => event.preventDefault());
+
+  // Disable specific keys
+  document.onkeydown = function (e) {
+    // Disable Ctrl+U, Ctrl+S, Ctrl+C, Ctrl+V, F12, and Ctrl+Shift+I
+    if (
+      e.ctrlKey && ['u', 's', 'c', 'v'].includes(e.key.toLowerCase()) ||
+      e.key === 'F12' ||
+      (e.ctrlKey && e.shiftKey && e.key === 'I')
+    ) {
+      e.preventDefault();
+      return false;
+    }
+  };
+</script>
 </body>
 </html>
